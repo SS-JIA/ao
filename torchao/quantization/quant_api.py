@@ -1939,10 +1939,8 @@ ModuleFqnToConfig = FqnToConfig
 # for now, we need to keep track of what configs support custom param quantization.
 # Once we've updated all the transform functions to take in a custom_param kwarg, we can delete this object and the subsequent check
 # TODO see https://github.com/pytorch/ao/issues/3252 for more details
-from torchao.prototype.moe_training.config import (
-    FP8GroupedMMConfig,
-    MXFP8GroupedMMConfig,
-)
+from torchao.prototype.moe_training.config import FP8GroupedMMConfig
+from torchao.prototype.mx_formats.grouped_mm.config import MXFP8GroupedMMConfig
 
 CUSTOM_PARAM_QUANTIZATION_SUPPORTED_CONFIGS = {
     Float8DynamicActivationFloat8WeightConfig,
