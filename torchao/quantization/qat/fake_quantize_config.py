@@ -443,15 +443,17 @@ def _infer_fake_quantize_configs(
             activation_dtype=e4m3_dtype,
         )
     elif isinstance(base_config, NVFP4DynamicActivationNVFP4WeightConfig):
+        from torchao.prototype.mx_formats.nvfp4_tensor import NVFP4QuantizeKernelChoice
+
         act_config = NVFP4FakeQuantizeConfig(
             use_per_tensor_scale=base_config.use_dynamic_per_tensor_scale,
             use_swizzled_scales=False,
-            use_triton_kernel=False,
+            nvfp4_quantize_kernel_choice=NVFP4QuantizeKernelChoice.TORCH,
         )
         weight_config = NVFP4FakeQuantizeConfig(
             use_per_tensor_scale=base_config.use_dynamic_per_tensor_scale,
             use_swizzled_scales=True,
-            use_triton_kernel=base_config.use_triton_kernel,
+            nvfp4_quantize_kernel_choice=base_config.nvfp4_quantize_kernel_choice,
         )
     elif isinstance(base_config, MXDynamicActivationMXWeightConfig):
         act_config = MXFakeQuantizeConfig(
